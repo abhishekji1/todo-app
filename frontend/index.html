@@ -20,7 +20,7 @@
   <div id="list"></div>
 
   <script>
-    const backend = 'http://localhost:5000'; // replace
+    const backend = 'https://todo-app-65rc.onrender.com'; // replace
     async function load() {
       const res = await fetch(backend + '/todos');
       const todos = await res.json();
