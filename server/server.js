@@ -26,6 +26,19 @@ app.post('/api/todos', async (req, res) => {
   res.json(result.rows[0]);
 });
 
+// Delete a todo
+app.delete('/api/todos/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      await pool.query('DELETE FROM todos WHERE id = $1', [id]);
+      res.status(204).send(); // No content
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

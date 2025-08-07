@@ -19,6 +19,13 @@
       todos.forEach(todo => {
         const li = document.createElement('li');
         li.textContent = todo.task + (todo.completed ? ' ✅' : '');
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '🗑️';
+        deleteBtn.style.marginLeft = '10px';
+        deleteBtn.onclick = () => deleteTodo(todo.id);
+        li.appendChild(deleteBtn);
+
         list.appendChild(li);
       });
     }
@@ -33,6 +40,13 @@
       document.getElementById('new-task').value = '';
       fetchTodos();
     }
+
+    async function deleteTodo(id) {
+        await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+        fetchTodos(); // Refresh list
+    }
+
+
 
     fetchTodos();
   </script>
